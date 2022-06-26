@@ -1,0 +1,8 @@
+#!/bin/bash -ex
+sudo yum update -y
+sudo yum install -y httpd php
+sudo service httpd start
+sudo systemctl enable httpd.service
+cd /var/www/html
+wget https://us-west-2-tcprod.s3.amazonaws.com/courses/ILT-TF-200-ARCHIT/v7.1.8/lab-1-EC2/scripts/instanceBdata.zip
+unzip instanceBdata.zip
