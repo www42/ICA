@@ -14,7 +14,7 @@ aws ec2 describe-images --image-ids $AMI
 # Get VPCs
 aws ec2 describe-vpcs --query "Vpcs[*]" 
 aws ec2 describe-vpcs --query "length(Vpcs)" 
-aws ec2 describe-vpcs --query "Vpcs[*].{VpcId:VpcId,CidrBlock:CidrBlockAssociationSet[0].CidrBlock,IsDefault:IsDefault}" --output table 
+aws ec2 describe-vpcs --query "Vpcs[*].{VpcId:VpcId,CidrBlock:CidrBlock}" --output table
 aws ec2 describe-vpcs --query "Vpcs[?VpcId=='vpc-06d750ebcced0f623']"
 # Get default VPC
 #     by query
@@ -51,5 +51,5 @@ INSTANCE=$(\
 
 # SSH
 ls -l $KEY.pem
-ssh -i ec2-user@ec2-3-72-112-84.eu-central-1.compute.amazonaws.com
+ssh -i $KEY.pem ec2-user@ec2-3-72-112-84.eu-central-1.compute.amazonaws.com
 netstat -ant
