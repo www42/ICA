@@ -1,6 +1,6 @@
 # ICA
 
-<img src="img\ica.png" width="200"/>
+<img src="img\ica.png" width="300"/>
 
 
 ### Useful Links
