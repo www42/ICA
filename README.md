@@ -1,8 +1,6 @@
 # ICA
 
-<img src="img\ica.png" width="300"/>
-
-
+AWS Instructor Candidate Authorization
 
 [AWS Authorized Instructor Program](https://aws.amazon.com/training/aws-authorized-instructor-program/)
 

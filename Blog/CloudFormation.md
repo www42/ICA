@@ -1,4 +1,4 @@
-# Using AWS CloudFormation
+# CloudFormation
 
 ## VS Code Extensions
 
