@@ -8,10 +8,11 @@ For more information about CDK, constructs, and the Python code refer to this gu
 
 ## Goal
 
-Goal is to create a S3 bucket with static web site configuration and public access using AWS CDK (Python).
+Goal is to create a S3 bucket with static web site configuration and public access using AWS CDK (Python). Upload an index.html file to the bucket (via AWS console) and you have a running static website.
 
 
 ## Prerequisites
+
 
 You have to install the AWS CDK
 
@@ -32,6 +33,8 @@ aws --version
 ````
 
 As code editor I use VS Code.
+
+A Python installation is **not** required because CDK creates a [virtual Python environment](https://docs.python.org/3/tutorial/venv.html).
 
 ## Overall workflow
 
@@ -65,7 +68,7 @@ cdk ls
 
 Tipp: If you recieve *Import "contructs" could not be resolved* 
 
-![python error](img/python_error.png)
+<img src="img/python_error.png" alt="python error" width="600"/>
 
 select the Python interpreter matching
 
@@ -122,32 +125,8 @@ aws cloudformation describe-stack-resources --stack-name $stackName --query "sor
 
 Update `hello_cdk/hello_cdk_stack.py`
 
-````python
-from typing_extensions import Self
-from aws_cdk import (
-    Duration,
-    Stack,
-    RemovalPolicy,
-    aws_s3 as s3,
-)
-from constructs import Construct
+<img src="img/update_code.png" alt="update code" width="800"/>
 
-class HelloCdkStack(Stack):
-
-    def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
-        super().__init__(scope, construct_id, **kwargs)
-
-        # The code that defines your stack goes here
-
-        bucket = s3.Bucket(self, "MyStaticWebsiteBucket",
-            versioned=True,
-            public_read_access=True,
-            website_index_document="index.html",
-            website_error_document="error.html",
-            removal_policy=RemovalPolicy.DESTROY,
-            auto_delete_objects=True
-        )
-````
 
 ````bash
 cdk diff
