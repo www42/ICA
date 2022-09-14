@@ -73,4 +73,4 @@ Command Palette → Snippets: Configure User Snippets → yaml
 
 5. Hover over and click to get the AWS docs
 
-<img src="img/cfn-hover.png" alt="hover over" width="400"/>
+<img src="img/cfn-hover.png" alt="hover over" width="300"/>
