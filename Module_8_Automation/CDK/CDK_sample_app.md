@@ -16,21 +16,21 @@ Goal is to create a S3 bucket with static web site configuration and public acce
 
 You have to install the AWS CDK
 
-````bash
+```bash
 npm install -g aws-cdk
 cdk --version
-````
+```
 
 Then you need to create a bootstrap stack. Read [here](https://docs.aws.amazon.com/cdk/v2/guide/bootstrapping.html) about bootstrapping.
-````bash
+```bash
 cdk bootstrap aws://<account number>/eu-central-1
-````
+```
 
 AWS CLI is needed for some commands. For information how to install [see here](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
 
-````bash
+```bash
 aws --version
-````
+```
 
 As code editor I use VS Code.
 
@@ -49,20 +49,20 @@ From [step-by-step guide][docs]
 
 ## Create the app 
 
-````bash
+```bash
 mkdir hello-cdk
 cd hello-cdk
 cdk init app --language python
 source .venv/bin/activate
 python -m pip install -r requirements.txt
 ls -l
-````
+```
 
 ## List the stacks in the app
 
-````bash
+```bash
 cdk ls
-````
+```
 
 ## Add an Amazon S3 bucket
 
@@ -72,13 +72,13 @@ Tipp: If you recieve *Import "contructs" could not be resolved*
 
 select the Python interpreter matching
 
-````bash
+```bash
 which python
-````
+```
 
 Edit `hello_cdk/hello_cdk_stack.py`
 
-````python
+```python
 from typing_extensions import Self
 from aws_cdk import (
     Duration,
@@ -100,26 +100,26 @@ class HelloCdkStack(Stack):
             website_index_document="index.html",
             website_error_document="error.html"
         )
-````
+```
 
 ## Synthesize an AWS CloudFormation template
 
-````bash
+```bash
 cdk synth
-````
+```
 
 ## Deploying the stack
 
-````bash
+```bash
 cdk deploy
-````
+```
 
-````bash
+```bash
 aws cloudformation describe-stacks --query "Stacks[*].{StackName:StackName,StackStatus:StackStatus}" --output table
 stackName='HelloCdkStack'
 aws cloudformation describe-stacks --stack-name $stackName
 aws cloudformation describe-stack-resources --stack-name $stackName --query "sort_by(StackResources[*].{LogicalResourceId:LogicalResourceId,ResourceType:ResourceType,ResourceStatus:ResourceStatus}, &ResourceType)" --output table
-````
+```
 
 ## Modifying the app
 
@@ -128,21 +128,21 @@ Update `hello_cdk/hello_cdk_stack.py`
 <img src="img/update_code.png" alt="update code" width="800"/>
 
 
-````bash
+```bash
 cdk diff
 cdk deploy
-````
+```
 
 ## Destroying the app's resources
 
-````bash
+```bash
 cdk destroy
-````
+```
 
 ## Remove app
 
-````bash
+```bash
 deactivate
 cd ..
 rm -r hello-cdk
-````
+```

@@ -13,7 +13,7 @@ Command Palette → Snippets: Configure User Snippets → yaml
 
 ### Blank template
 
-````json
+```json
 {
     "cloudFormation template": {
 		"prefix": "cfn",
@@ -36,11 +36,11 @@ Command Palette → Snippets: Configure User Snippets → yaml
 		]
 	},
 }	
-````
+```
 
 ### S3 bucket
 
-````json
+```json
 {
 	"s3-bucket": {
 		"prefix": "s3-bucket",
@@ -60,7 +60,7 @@ Command Palette → Snippets: Configure User Snippets → yaml
 	}
 
 }
-````
+```
 
 ## Workflow
 

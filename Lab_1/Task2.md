@@ -1,10 +1,10 @@
-# Task 2: Create an Amazon EC2 instance using the AWS Command Line Interface
+# Lab 1 (Content Version 7.1.10)
 
-## Task 2.1
+## Task 2 Create an Amazon EC2 instance using the AWS Command Line Interface
 
-## Task 2.2
+### Task 2.2 Obtain the AMI to use
 
-### 41.
+#### 40.
 
 ```bash
 # Set the Region
@@ -21,9 +21,9 @@ AMI=$(\
 echo $AMI
 ```
 
-## Task 2.3
+### Task 2.3 Obtain the subnet to use
 
-### 42.
+#### 41.
 
 ```bash
 SUBNET=$(\
@@ -35,9 +35,9 @@ SUBNET=$(\
 echo $SUBNET
 ```
 
-## Task 2.4
+### Task 2.4 Obtain the Security Group to use
 
-### 43.
+#### 42.
 
 ```bash
 SG=$(\
@@ -49,24 +49,24 @@ SG=$(\
 echo $SG
 ```
 
-## Task 2.5
+### Task 2.5 Download a user data script
 
-### 44.
+#### 43.
 
 ```bash
 cd ~
-curl -O https://us-west-2-tcprod.s3.amazonaws.com/courses/ILT-TF-200-ARCHIT/v7.1.8/lab-1-EC2/scripts/UserDataInstanceB.txt
+wget https://us-west-2-tcprod.s3.amazonaws.com/courses/ILT-TF-200-ARCHIT/v7.1.8/lab-1-EC2/scripts/UserDataInstanceB.txt
 ```
 
-### 45.
+### 44.
 
 ```bash
 cat UserDataInstanceB.txt
 ```
 
-## Task 2.6
+### Task 2.6 Launch the instance
 
-### 46.
+#### 45.
 
 ```bash
 INSTANCE=$(\
@@ -77,26 +77,26 @@ INSTANCE=$(\
         --user-data file://./UserDataInstanceB.txt \
         --instance-type t3.micro \
         --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=InstanceB}]' \
-        --query 'Instances[*].InstanceId'
+        --query 'Instances[*].InstanceId' \
         --output text \
 )
 ```
 
-### 47.
+#### 46.
 
 ```bash
 echo $INSTANCE
 ```
 
-## Task 2.7
+### Task 2.7 Wait for the instance to be ready
 
-### 48.
+#### 47.
 
 ```bash
 aws ec2 describe-instances --instance-ids $INSTANCE
 ```
 
-### 50.
+#### 49.
 ```bash
 aws ec2 describe-instances \
     --instance-ids $INSTANCE \
@@ -104,9 +104,9 @@ aws ec2 describe-instances \
     --output text
 ```
 
-## Task 2.8
+### Task 2.8 Test connectivity to the new web server
 
-### 51.
+#### 50.
 ```bash
 aws ec2 describe-instances \
     --instance-ids $INSTANCE \
