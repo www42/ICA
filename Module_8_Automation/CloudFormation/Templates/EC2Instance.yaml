@@ -1,0 +1,62 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Description:  >- 
+  Create a ec2 instance with a new security group allowing port 80 inbound traffic
+
+Parameters: 
+  ImageId:
+    Description: Amazon Machine Image ID
+    Type: AWS::EC2::Image::Id
+    Default: ami-0e2031728ef69a466
+
+Resources: 
+  SecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: My http allow security group
+      GroupDescription: >-
+        Enable http port 80 inbound
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+
+  WebServer:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: !Ref ImageId
+      InstanceType: t2.micro
+      SecurityGroups:
+        - !Ref SecurityGroup
+      UserData: !Base64 |
+        #!/bin/bash -ex
+        sudo yum update -y
+        sudo yum install -y httpd php
+        sudo service httpd start
+        sudo systemctl enable httpd.service
+        cd /var/www/html
+        wget https://heidelberg.fra1.digitaloceanspaces.com/index.html
+
+  IpAddress:
+    Type: AWS::EC2::EIP
+
+  IpAssoc:
+    Type: AWS::EC2::EIPAssociation
+    Properties:
+      InstanceId: !Ref WebServer
+      EIP: !Ref IpAddress
+
+
+Outputs: 
+  WebServerIpAddress:
+    Value: !Ref IpAddress
+    Description: Elastic IP IpAddress
+  WebUrl:
+    Value: !Join 
+      - ''
+      - - http://
+        - !GetAtt 
+          - WebServer
+          - PublicDnsName
+        
