@@ -19,6 +19,10 @@ stackId=$(aws cloudformation create-stack --stack-name $stackName --template-bod
 stackName=$(aws cloudformation describe-stacks --query "Stacks[?StackId=='$stackId'].StackName" --output text)
 aws cloudformation describe-stacks --stack-name $stackName
 
+# Anmerkung: um einen stack zu erzeugen kann man kann auch sagen 
+aws cloudformation deploy --template-file foo.yaml ----stack-name bar
+# 'deploy' ist eigentlich dazu da, ein change set zu erzeugen. Wenn aber der gar nicht existiert wird er angelegt.
+
 # describe-stack-resources
 aws cloudformation describe-stack-resources --stack-name $stackName
 aws cloudformation describe-stack-resources --stack-name $stackName --query "sort_by(StackResources[*].{LogicalResourceId:LogicalResourceId,ResourceType:ResourceType,ResourceStatus:ResourceStatus}, &ResourceType)" --output table
