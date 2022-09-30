@@ -26,10 +26,9 @@ AWS Instructor Candidate Authorization
 | 17 | [Container: Container Services](Topic_17)                                                  | Module  9, 15-25 |
 | 18 | [Networking 2: VPC Endpoints & VPC peering](Topic_18)                                      | Module 10,  5-15 |
 | 19 | [Networking 2: Hybrid networking & AWS Transit Gateway](Topic_19)                          | Module 10, 20-32 |
-| 20 | Serverless: What is serverless? & API Gateway                                  | Module 11,  5-12 |
-| 21 | Serverless: Amazon SQS                                                         | Module 11, 13-19 |
-| 22 | Serverless: Amazon SNS, Amazon Kinesis & AWS Step Functions                    | Module 11, 20-33 |
-| 23 | Edge Services: Edge Fundamentals & Route 53 CloudFront                         | Module 12,  5-17 |
-| 24 | Edge Services: Amazon CloudFront & DDoS Protection                             | Module 12, 18-36 |
-| 25 | Backup and Recovery: Disaster Planning                                         | Module 13,  5-15 |
-| 26 | Backup and Recovery: AWS Backup & Recovery Strategies                          | Module 13, 16-31 |
+| 20 | Serverless: What is serverless? & API Gateway & Amazon SQS                     | Module 11,  5-19 |
+| 21 | Serverless: Amazon SNS, Amazon Kinesis & AWS Step Functions                    | Module 11, 20-33 |
+| 22 | Edge Services: Edge Fundamentals & Route 53 CloudFront                         | Module 12,  5-17 |
+| 23 | Edge Services: Amazon CloudFront & DDoS Protection                             | Module 12, 18-36 |
+| 24 | Backup and Recovery: Disaster Planning                                         | Module 13,  5-15 |
+| 25 | Backup and Recovery: AWS Backup & Recovery Strategies                          | Module 13, 16-31 |
