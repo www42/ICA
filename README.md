@@ -26,7 +26,7 @@ AWS Instructor Candidate Authorization
 | 17 | [Container: Container Services](Topic_17)                                                  | Module  9, 15-25 |
 | 18 | [Networking 2: VPC Endpoints & VPC peering](Topic_18)                                      | Module 10,  5-15 |
 | 19 | [Networking 2: Hybrid networking & AWS Transit Gateway](Topic_19)                          | Module 10, 20-32 |
-| 20 | Serverless: What is serverless? & API Gateway & Amazon SQS                     | Module 11,  5-19 |
+| 20 | [Serverless: What is serverless? & API Gateway & Amazon SQS](Topic_20)                     | Module 11,  5-19 |
 | 21 | Serverless: Amazon SNS, Amazon Kinesis & AWS Step Functions                    | Module 11, 20-33 |
 | 22 | Edge Services: Edge Fundamentals & Route 53 CloudFront                         | Module 12,  5-17 |
 | 23 | Edge Services: Amazon CloudFront & DDoS Protection                             | Module 12, 18-36 |
