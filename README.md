@@ -21,12 +21,12 @@ AWS Instructor Candidate Authorization
 | 12 | Monitoring and Scaling: Monitoring                                             | Module  7,  5-18 |
 | 13 | Monitoring and Scaling: Alarms and Events & Load Balancing                     | Module  7, 19-30 |
 | 14 | Monitoring and Scaling: Auto Scaling                                           | Module  7, 31-46 |
-| 15 | [Automation: Cloudformation & Infrastructure management](Topic_15)                         | Module  8,  5-27 |
-| 16 | [Containers: Microservices & Containers](Topic_16)                                         | Module  9,  5-14 |
-| 17 | [Container: Container Services](Topic_17)                                                  | Module  9, 15-25 |
-| 18 | [Networking 2: VPC Endpoints & VPC peering](Topic_18)                                      | Module 10,  5-15 |
-| 19 | [Networking 2: Hybrid networking & AWS Transit Gateway](Topic_19)                          | Module 10, 20-32 |
-| 20 | [Serverless: What is serverless? & API Gateway & Amazon SQS](Topic_20)                     | Module 11,  5-19 |
+| 15 | [Automation: Cloudformation & Infrastructure management](Topic_15)             | Module  8,  5-27 |
+| 16 | [Containers: Microservices & Containers](Topic_16)                             | Module  9,  5-14 |
+| 17 | [Container: Container Services](Topic_17)                                      | Module  9, 15-25 |
+| 18 | [Networking 2: VPC Endpoints & VPC peering](Topic_18)                          | Module 10,  5-15 |
+| 19 | [Networking 2: Hybrid networking & AWS Transit Gateway](Topic_19)              | Module 10, 20-32 |
+| 20 | [Serverless: What is serverless? & API Gateway & Amazon SQS](Topic_20)         | Module 11,  5-19 |
 | 21 | Serverless: Amazon SNS, Amazon Kinesis & AWS Step Functions                    | Module 11, 20-33 |
 | 22 | Edge Services: Edge Fundamentals & Route 53 CloudFront                         | Module 12,  5-17 |
 | 23 | Edge Services: Amazon CloudFront & DDoS Protection                             | Module 12, 18-36 |
