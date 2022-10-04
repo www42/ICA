@@ -9,13 +9,24 @@ Parameters:
     Type: AWS::EC2::Image::Id
     Default: ami-0e2031728ef69a466
 
+  Vpc:
+    Description: VPC Id
+    Type: AWS::EC2::VPC::Id
+    Default: vpc-08a79750c1dd8d765
+
+  PublicSubnet:
+    Description: Public Subnet ID
+    Type: AWS::EC2::Subnet::Id
+    Default: subnet-0e4166e1fc719f56d
+
 Resources: 
   SecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupName: My http allow security group
+      GroupName: Allow HTTP inbound
       GroupDescription: >-
-        Enable http port 80 inbound
+        Allow HTTP port 80 inbound
+      VpcId: !Ref Vpc
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: 80
@@ -27,8 +38,9 @@ Resources:
     Properties:
       ImageId: !Ref ImageId
       InstanceType: t2.micro
-      SecurityGroups:
-        - !Ref SecurityGroup
+      SubnetId: !Ref PublicSubnet
+      SecurityGroupIds:
+        - !GetAtt SecurityGroup.GroupId
       UserData: !Base64 |
         #!/bin/bash -ex
         sudo yum update -y
@@ -36,7 +48,7 @@ Resources:
         sudo service httpd start
         sudo systemctl enable httpd.service
         cd /var/www/html
-        wget https://heidelberg.fra1.digitaloceanspaces.com/index.html
+        wget -O index.html https://heidelberg.fra1.digitaloceanspaces.com/helloICA.html
 
   IpAddress:
     Type: AWS::EC2::EIP
@@ -56,7 +68,5 @@ Outputs:
     Value: !Join 
       - ''
       - - http://
-        - !GetAtt 
-          - WebServer
-          - PublicDnsName
+        - !GetAtt WebServer.PublicDnsName
         
