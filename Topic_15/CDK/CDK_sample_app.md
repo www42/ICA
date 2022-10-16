@@ -53,7 +53,7 @@ cdk --version
 You need to create a CDK bootstrap stack. Read [here](https://docs.aws.amazon.com/cdk/v2/guide/bootstrapping.html) about bootstrapping.
 
 ```bash
-accountNumber='111111111111'
+accountNumber='502737081024'
 region='eu-central-1'
 
 cdk bootstrap "aws://$accountNumber/$region"
@@ -168,7 +168,10 @@ cdk diff
 cdk deploy
 ```
 
-## OptionalStep 8: Clean up
+## Optional Step 8: Upload index.html to S3 Bucket
+
+
+## Optional Step 9: Clean up
 
 ### Delete CloudFormation Stack and (hopefully) all it's Resources
 
@@ -191,3 +194,6 @@ stackName='CDKToolkit'
 aws cloudformation delete-stack --stack-name $stackName
 aws cloudformation describe-stacks --query "Stacks[*].{StackName:StackName,StackStatus:StackStatus}" --output table
 ```
+
+Delete Staging Bucket 
+`cdk-hnb659fds-assets-502737081024-eu-central-1` ??
