@@ -2,71 +2,104 @@
 
 [docs]:https://docs.aws.amazon.com/cdk/v2/guide/hello_world.html
 
-This document is my short version of the [step-by-step guide][docs] in the *AWS CDK v2 Developer Guide*.
+### Origin
 
-For more information about CDK, constructs, and the Python code refer to this guide.
+This document is my short version of the [AWS CDK v2 Developer Guide][docs]. If you have any questions about CDK, constructs, and the Python code refer to this guide.
 
-## Goal
+### Goal
 
-Goal is to create a S3 bucket with static web site configuration and public access using AWS CDK (Python). Upload an index.html file to the bucket (via AWS console) and you have a running static website.
-
-
-## Prerequisites
+Goal is to create a S3 bucket with static web site configuration and public access using AWS CDK (Python). Upload an index.html file to the bucket and you have a running static website.
 
 
-You have to install the AWS CDK
+### Prerequisites
+
+npm is needed to install the CDK package.
 
 ```bash
-npm install -g aws-cdk
-cdk --version
+npm --version
 ```
 
-Then you need to create a bootstrap stack. Read [here](https://docs.aws.amazon.com/cdk/v2/guide/bootstrapping.html) about bootstrapping.
-```bash
-cdk bootstrap aws://<account number>/eu-central-1
-```
 
-AWS CLI is needed for some commands. For information how to install [see here](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
+### No Prerequisites
+
+A Python installation is **not** required because CDK creates a [virtual Python environment](https://docs.python.org/3/tutorial/venv.html).
+
+AWS CLI is **not** a prerequisite for CDK, but is very useful. For installation [see here](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
 
 ```bash
 aws --version
 ```
 
-As code editor I use VS Code.
+You need to edit the Python code. As code editor I prefer [VS Code](https://code.visualstudio.com/).
 
-A Python installation is **not** required because CDK creates a [virtual Python environment](https://docs.python.org/3/tutorial/venv.html).
 
 ## Overall workflow
 
-From [step-by-step guide][docs]
-
-1. Create the app from a template provided by the AWS CDK
-2. Add code to the app to create resources within stacks
-3. Build the app (optional; the AWS CDK Toolkit will do it for you if you forget)
-4. Synthesize one or more stacks in the app to create an AWS CloudFormation template
-5. Deploy one or more stacks to your AWS account
+<img src="img/six_steps.png" alt="six steps" width="600"/>
 
 
-## Create the app 
+
+## Step 1: Install CDK
+
+```bash
+npm install --global aws-cdk
+
+cdk --version
+```
+
+
+## Step 2: Bootstrap CDK
+
+You need to create a CDK bootstrap stack. Read [here](https://docs.aws.amazon.com/cdk/v2/guide/bootstrapping.html) about bootstrapping.
+
+```bash
+accountNumber='111111111111'
+region='eu-central-1'
+
+cdk bootstrap "aws://$accountNumber/$region"
+```
+
+Review the CDK bootstrap stack
+
+```bash
+aws cloudformation describe-stacks --query "Stacks[*].{StackName:StackName,StackStatus:StackStatus}" --output table
+
+stackName='CDKToolkit'
+
+aws cloudformation describe-stack-resources --stack-name $stackName --query "sort_by(StackResources[*].{LogicalResourceId:LogicalResourceId,ResourceType:ResourceType,ResourceStatus:ResourceStatus}, &ResourceType)" --output table
+```
+
+
+
+## Step 3: Create the Python App 
 
 ```bash
 mkdir hello-cdk
 cd hello-cdk
+
 cdk init app --language python
+
 source .venv/bin/activate
 python -m pip install -r requirements.txt
 ls -l
 ```
 
-## List the stacks in the app
+List the stacks in the app
 
 ```bash
-cdk ls
+cdk list
 ```
 
-## Add an Amazon S3 bucket
+## Step 4: Edit the Python App
 
-Tipp: If you recieve *Import "contructs" could not be resolved* 
+We want to add a S3 bucket to the stack inside the Python code.
+
+Open `hello_cdk/hello_cdk_stack.py` in your code editor.
+
+---
+Tipp:
+
+If you recieve *Import "contructs" could not be resolved* 
 
 <img src="img/python_error.png" alt="python error" width="600"/>
 
@@ -75,11 +108,13 @@ select the Python interpreter matching
 ```bash
 which python
 ```
+---
 
-Edit `hello_cdk/hello_cdk_stack.py`
+
+
+Replace everything with this code: 
 
 ```python
-from typing_extensions import Self
 from aws_cdk import (
     Duration,
     Stack,
@@ -102,13 +137,13 @@ class HelloCdkStack(Stack):
         )
 ```
 
-## Synthesize an AWS CloudFormation template
+## Step 5: Synthesize the Template for the CloudFormation Stack
 
 ```bash
 cdk synth
 ```
 
-## Deploying the stack
+## Step 6: Deploying the stack
 
 ```bash
 cdk deploy
@@ -121,7 +156,7 @@ aws cloudformation describe-stacks --stack-name $stackName
 aws cloudformation describe-stack-resources --stack-name $stackName --query "sort_by(StackResources[*].{LogicalResourceId:LogicalResourceId,ResourceType:ResourceType,ResourceStatus:ResourceStatus}, &ResourceType)" --output table
 ```
 
-## Modifying the app
+## Optional Step 7: Modifying the app
 
 Update `hello_cdk/hello_cdk_stack.py`
 
@@ -133,16 +168,26 @@ cdk diff
 cdk deploy
 ```
 
-## Destroying the app's resources
+## OptionalStep 8: Clean up
+
+### Delete CloudFormation Stack and (hopefully) all it's Resources
 
 ```bash
 cdk destroy
 ```
 
-## Remove app
+### Delete the App
 
 ```bash
 deactivate
 cd ..
 rm -r hello-cdk
+```
+
+### Remove Bootstrap Stack
+
+```bash
+stackName='CDKToolkit'
+aws cloudformation delete-stack --stack-name $stackName
+aws cloudformation describe-stacks --query "Stacks[*].{StackName:StackName,StackStatus:StackStatus}" --output table
 ```
